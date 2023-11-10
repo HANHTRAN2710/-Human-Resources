@@ -1,0 +1,85 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout/admin :: content('Dashboard', ~{this :: .content-wrapper})">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">DANH SÁCH NHÂN VIÊN</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<form th:action="@{/danhsachnv/details}" enctype="multipart/form-data" method="get">
+					<label for="fromDate">Từ ngày:</label>
+					<input type="text" id="fromDate" name="fromDate" placeholder="dd/MM/yyyy" required>
+					<br>
+					<label for="toDate">Đến ngày:</label>
+					<input type="text" id="toDate" name="toDate" placeholder="dd/MM/yyyy" required>
+					<br>
+					<button type="submit">Tìm</button>
+				</form>
+				<!-- Small boxes (Stat box) -->
+				<form method="post" th:action="@{/danhsachnv/details}" enctype="multipart/form-data">
+					<table class="table">
+						<thead class="thead-dark">
+							<tr>
+
+								<th scope="col">HO TEN</th>
+
+								<th scope="col">TIEU DE</th>
+								<th scope="col">Cho Ai Quản Li</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="yeucau : ${yeucaus}">
+								
+
+								<td th:text="${yeucau.tieude}"></td>
+
+								<td th:text="${yeucau.tieude}"></td>
+
+
+
+								<!--<td th:each="yeucau : ${yeucaus}"   th:text="${yeucau.manv_xuly}"></td> -->
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				<!-- /.row -->
+				<!-- Main row -->
+
+				<!-- /.row (main row) -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+
+</body>
+
+</html>

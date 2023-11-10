@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="layout/admin :: content('Dashboard', ~{this :: .content-wrapper})">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">DANH SÁCH NHÂN VIÊN</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<!-- Small boxes (Stat box) -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">UserName</th>
+							<th scope="col">HO TEN</th>
+							<th scope="col">Ngay sinh</th>
+							<th scope="col">Hinh Anh</th>
+							<th scope="col">Role Name</th>
+							<th scope="col">Hanh dong</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="nhanvien : ${nhanviens}">
+
+							<td>
+								<a th:href="@{'/admin/danhsachnv/details/' + ${nhanvien.username}}"
+									th:text="${nhanvien.username}"></a>
+
+							</td>
+							<td th:text="${nhanvien.hoten}"></td>
+							<td th:text="${nhanvien.ngaysinh}"></td>
+							<td>
+								<img th:src="@{'/images/' + ${nhanvien.hinhanh}}" width="70" height="70">
+							</td>
+							<td th:text="${nhanvien.role.name}"></td>
+							<td>
+								<a th:href="@{'/admin/yeucau/filterByMaNhanVien?maNhanVien=' + ${nhanvien.username}}">
+									Xem yeu cau									
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- /.row -->
+				<!-- Main row -->
+
+				<!-- /.row (main row) -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+
+</body>
+
+</html>

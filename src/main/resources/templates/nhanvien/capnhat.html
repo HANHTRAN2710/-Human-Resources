@@ -1,0 +1,106 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout/nhanvien :: content('Dashboard', ~{this :: .content-wrapper})">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">Thông Tin Nhân Viên</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+
+				
+   					<div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"></h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+             <table class="table text-nowrap mb-0 align-center" border="3">
+				<tr>
+					<th:block th:if="${msg != null}">
+						<div class="alert alert-info">
+							<span th:text="${msg}"></span>
+						</div>
+					</th:block>
+				</tr>
+				<tr>
+					<form method="post" th:action="@{/nhanvien/update}" enctype="multipart/form-data">
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" id="password" placeholder="Password" th:field="${nhanvien.password}" />
+					</td>
+				</tr>
+				<tr>
+					<td>Full Name:</td>
+					<td><input type="text" id="hoten" placeholder="Full Name" th:field="${nhanvien.hoten}" /></td>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+					<td>Date of Birth:</td>
+					<td><input type="date" th:field="${nhanvien.ngaysinh}" id="ngaysinh" /></td>
+				</tr>
+				<tr>
+					<td>Upload File:</td>
+					<td><input type="file" name="file" />
+
+					</td>
+
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<img th:src="@{'/images/' + ${nhanvien.hinhanh}}" width="100" height="100">
+					</td>
+				</tr>
+
+				<tr><td></td>
+					<td colspan="2">
+						<input type="hidden" th:field="${nhanvien.username}">
+						<input type="hidden" th:field="${nhanvien.kichhoat}">
+						<input type="hidden" th:field="${nhanvien.role.id}">
+						<input type="hidden" th:field="${nhanvien.hinhanh}">
+						<input type="submit" value="Update" />
+					</td>
+				</tr>
+				</form>
+			</table>
+            </div>
+    
+   				
+
+
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+</body>
+
+</html>

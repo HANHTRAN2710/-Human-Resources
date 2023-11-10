@@ -1,0 +1,59 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<html>
+  <head>
+    <title>Register</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
+    
+  </head>
+  <body>
+    <div class="testbox">
+      <form method="post" th:action="@{/account/register}">
+        <div class="banner">
+          <h1>Register</h1>
+        </div>
+        <div class="item">
+          <label for="username">Username<span>*</span></label>
+          <input  type="text" th:field="${account.username}"/>
+        </div>
+        <div class="item">
+          <label for="password">Password<span>*</span></label>
+          <input  type="password" th:field="${account.password}"/>
+        </div>
+        <div class="item">
+          <label for="hoten">Họ tên<span>*</span></label>
+          <input  type="text" th:field="${account.hoten}"/>
+        </div>
+       
+        <div class="item">
+          <label for="role">Role<span>*</span></label>
+          <th:block>
+							
+						<select th:field="${account.role.id}">
+								<option th:each="role : ${roles}" th:value="${role.id}"
+									th:text="${role.name}"></option>
+							</select>
+						</th:block>
+        </div>
+        
+        <div class="item">
+          <label for="ngaysinh">Ngày sinh<span>*</span></label>
+          <input  type="date" th:field="${account.ngaysinh}"/>
+        </div>
+        
+        <div class="item">
+          <label for="hinhanh">Hình<span>*</span></label>
+          <input  type="file" th:field="${account.hinhanh}"/>
+        </div>
+        
+        
+        <div class="btn-block">
+          <button type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

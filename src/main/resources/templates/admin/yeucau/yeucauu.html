@@ -1,0 +1,139 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout/admin :: content('Dashboard', ~{this :: .content-wrapper})">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">DANH SÁCH YEU CAU</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<!-- Small boxes (Stat box) -->
+				<form method="GET" th:action="@{/admin/yeucau/filterByDate}">
+					<div style="display: flex; align-items: center;">
+						<div style="margin: 0 10px">
+							<input type="date" id="from" name="from" style="border-radius: 5px;"
+								placeholder="Start date...">
+						</div>
+						<div style="margin-right: 10px">
+							<input type="date" id="to" name="to" style="border-radius: 5px;" placeholder="End date...">
+						</div>
+						<button type="submit"
+							style="width:40; height: 40; outline: none; padding: 8px; border-radius: 50%; align-items: center;">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</form>
+				<form method="GET" th:action="@{/admin/yeucau/filterByPriority}">
+					<div style="display: flex; align-items: center;">
+						<select name="priorityId" style="margin-left: 10px; border-radius: 5px;padding: 10px">
+							<option value="0">--ALL--</option>
+							<th:block th:each="r : ${priorities}">
+								<option th:value="${r.madouutien}" th:text="${r.tendouutien}"></option>
+							</th:block>
+						</select>
+						<button type="submit"
+							style="margin-left: 10px;width:40; height: 40; outline: none; padding: 21px; border-radius: 5px; display: flex; align-items: center;justify-content: center;">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</form>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">TIEU DE</th>
+							<th scope="col">NOI DUNG</th>
+							<th scope="col">NGAY GUI</th>
+							<th scope="col">MA DO UU TIEN</th>
+							<th scope="col">NGUOI GUI</th>
+							<th scope="col">NGUOI XU LI</th>
+							<th scope="col">HANH DONG</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="yeucau : ${yeucauss}">
+							<td th:text="${yeucau.tieude}"></td>
+							<td th:text="${yeucau.noidung}"></td>
+							<td th:text="${yeucau.ngaygui}"></td>
+							<td th:text="${yeucau.douutien.tendouutien}"></td>
+							<td th:text="${yeucau.nhanvienByManvGui.username}"></td>
+							<td th:utext="${yeucau.nhanvienByManvXuly?.username} ?: 'NULL'"></td>
+							<td>
+								<button type="button" class="btn btn-primary" data-toggle="modal"
+									th:data-target="@{'#exampleModal' + ${yeucau.mayeucau}}">
+									Gui Nhan Vien Support
+								</button>
+								<form action="/admin/yeucau/assignTheMaNhanVienSupport" method="POST">
+									<div class="modal fade" th:id="@{'exampleModal' + ${yeucau.mayeucau}}" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Chon nhan vien support</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<input type="hidden" name="maYeuCau" th:value="${yeucau.mayeucau}"/>
+													<select name="maNhanVienSupport"
+														style="margin-left: 10px; border-radius: 5px;padding: 10px">
+														<th:block th:each="r : ${nvSupports}">
+															<option th:value="${r.username}" th:text="${r.username}">
+															</option>
+														</th:block>
+													</select>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary">Luu</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- /.row -->
+				<!-- Main row -->
+
+				<!-- /.row (main row) -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+
+
+
+</body>
+
+</html>

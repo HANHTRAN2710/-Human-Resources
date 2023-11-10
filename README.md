@@ -1,4 +1,5 @@
-# -Human-Resources
+# -Human-Resources JAVA SPRING BOOT 
+.Công ty ABC muốn phát triển hệ thống support :
 Trong table NhanVien thêm 1 cột mới có tên là quyen. Cột này kiểu số nguyên có 1 trong 3 giá trị:
     1.	Nhân Viên
     2.	Nhân Viên Support
